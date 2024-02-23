@@ -94,7 +94,8 @@ namespace GestorDeContraseñas
         // Método para generar una contraseña segura
         public string GenerarContraseña()
         {
-            string contraseñaGenerada = "";
+            //string contraseñaGenerada = "";
+            StringBuilder contraseñaGeneradaSB = new StringBuilder();
             Random random = new Random();
             int longitudContraseña = random.Next(8, 21);
 
@@ -105,7 +106,7 @@ namespace GestorDeContraseñas
 
             char caracterEscogido;
 
-            while (contraseñaGenerada.Length < longitudContraseña)
+            while (contraseñaGeneradaSB.Length < longitudContraseña)
             {
                 switch (random.Next(0, 4))
                 {
@@ -113,7 +114,7 @@ namespace GestorDeContraseñas
                         if (numContiene < numTener)
                         {
                             caracterEscogido = numeros[random.Next(numeros.Length)];
-                            contraseñaGenerada += caracterEscogido;
+                            contraseñaGeneradaSB.Append (caracterEscogido);
                             numContiene++;
                         }
                         break;
@@ -122,7 +123,7 @@ namespace GestorDeContraseñas
                         if (minContiene < minTener)
                         {
                             caracterEscogido = letrasMin[random.Next(letrasMin.Length)];
-                            contraseñaGenerada += caracterEscogido;
+                            contraseñaGeneradaSB.Append(caracterEscogido);
                             minContiene++;
                         }
                         break;
@@ -131,7 +132,7 @@ namespace GestorDeContraseñas
                         if (mayContiene < mayTener)
                         {
                             caracterEscogido = letrasMay[random.Next(letrasMay.Length)];
-                            contraseñaGenerada += caracterEscogido;
+                            contraseñaGeneradaSB.Append(caracterEscogido);
                             mayContiene++;
                         }
                         break;
@@ -140,13 +141,13 @@ namespace GestorDeContraseñas
                         if (espContiene < espTener)
                         {
                             caracterEscogido = caracterEspecial[random.Next(caracterEspecial.Length)];
-                            contraseñaGenerada += caracterEscogido;
+                            contraseñaGeneradaSB.Append(caracterEscogido);
                             espContiene++;
                         }
                         break;
                 }
             }
-            return contraseñaGenerada;
+            return contraseñaGeneradaSB.ToString ();
         }
 
         // Método para validar una contraseña ingresada por el usuario
